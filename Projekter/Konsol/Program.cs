@@ -36,6 +36,11 @@ while (run)
             ADService adService = new ADService();
             adService.Start();
             break;
+        case "6":
+            // Kald BinaryConverter
+            BinaryConverter binaryConvert = new BinaryConverter();
+            binaryConvert.ConverteripAdr();
+            break;
         case "?":
             PrintMenu();
             break;
@@ -58,6 +63,7 @@ void PrintMenu()
     Console.WriteLine("3. Tic-Tac-Toe");
     Console.WriteLine("4. Binærkodeomformer");
     Console.WriteLine("5. AD Brugeroversigt");
+    Console.WriteLine("6. Kontoret Converter");
     Console.WriteLine("?. Help");
     Console.WriteLine("exit. Afslut");
     Console.Write("Indtast valg: ");
