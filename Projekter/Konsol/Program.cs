@@ -41,6 +41,11 @@ while (run)
             BinaryConverter binaryConvert = new BinaryConverter();
             binaryConvert.ConverteripAdr();
             break;
+        case "7":
+            // Kald IpConverter
+            BinaryConverter IpConvert = new BinaryConverter();
+            IpConvert.ConverterBit();
+            break;
         case "?":
             PrintMenu();
             break;
@@ -63,7 +68,8 @@ void PrintMenu()
     Console.WriteLine("3. Tic-Tac-Toe");
     Console.WriteLine("4. Binærkodeomformer");
     Console.WriteLine("5. AD Brugeroversigt");
-    Console.WriteLine("6. Kontoret Converter");
+    Console.WriteLine("6. Kontoret IP Converter");
+    Console.WriteLine("7. Kontoret Bit Converter");
     Console.WriteLine("?. Help");
     Console.WriteLine("exit. Afslut");
     Console.Write("Indtast valg: ");
