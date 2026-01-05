@@ -4,11 +4,12 @@ namespace Enterprice
 {
     public class TimeStampService
     {
+        // Forbindelsesstreng til SQLite-databasen (filen oprettes automatisk hvis den ikke findes)
         private const string ConnectionString = "Data Source=timestamp.db";
 
         public TimeStampService()
         {
-            // Opret tabel hvis den ikke eksisterer
+            // Opret tabel hvis den ikke allerede eksisterer
             using var conn = GetConnection();
             using var cmd = conn.CreateCommand();
 
@@ -38,12 +39,14 @@ namespace Enterprice
             // Find sidste stempling
             string? last = GetLastStampType(username);
 
+            // Hvis sidste var IN, stemples der nu ud
             if (last == "IN")
             {
                 InsertRecord(username, "OUT");
                 Console.WriteLine();
                 Console.WriteLine("-- Du er stemplet UD.");
             }
+            // Hvis der ikke er stemplet OUT eller ingen historik, stemples der nu IN
             else
             {
                 InsertRecord(username, "IN");
@@ -52,17 +55,19 @@ namespace Enterprice
             }
         }
 
-        // henter historikken
+        // henter historikken og skriver det som tekst linjer
         public List<string> GetHistory(string username)
         {
             var list = new List<string>();
 
+            // Returnerer tom liste hvis intet brugernavn er angivet
             if (string.IsNullOrWhiteSpace(username))
                 return list;
 
             using var conn = GetConnection();
             using var cmd = conn.CreateCommand();
 
+            // SQL: henter alle stemplinger for en bruger, sorteret nyeste først
             cmd.CommandText =
             """
             SELECT Time, Type
@@ -106,6 +111,8 @@ namespace Enterprice
             return result?.ToString();
         }
 
+
+        // Indsætter en ny stempling i databasen
         private void InsertRecord(string username, string type)
         {
             using var conn = GetConnection();
@@ -118,7 +125,7 @@ namespace Enterprice
             """;
 
             cmd.Parameters.AddWithValue("$u", username);
-            cmd.Parameters.AddWithValue("$time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            cmd.Parameters.AddWithValue("$time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")); //Hvilket format den skal gemme tiden I
             cmd.Parameters.AddWithValue("$type", type);
 
             cmd.ExecuteNonQuery();

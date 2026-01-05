@@ -2,6 +2,7 @@
 using Hjemmet;
 using Kontoret;
 using Enterprice;
+using ProjektGF2;
 
 bool run = true;
 while (run)
@@ -46,6 +47,11 @@ while (run)
             BinaryConverter IpConvert = new BinaryConverter();
             IpConvert.ConverterBit();
             break;
+        case "8":
+            // Kald Flip7
+            Flip7 Flip7 = new Flip7();
+            Flip7.Start();
+            break;
         case "?":
             PrintMenu();
             break;
@@ -70,6 +76,7 @@ void PrintMenu()
     Console.WriteLine("5. AD Brugeroversigt");
     Console.WriteLine("6. Kontoret IP Converter");
     Console.WriteLine("7. Kontoret Bit Converter");
+    Console.WriteLine("8. Hygggespil");
     Console.WriteLine("?. Help");
     Console.WriteLine("exit. Afslut");
     Console.Write("Indtast valg: ");
