@@ -84,7 +84,7 @@ namespace ProjektGF2
             while (turnActive)
             {
                 Console.WriteLine("\n[F]lip  [S]top  [E]xit"); // fortæller spilleren hvad valgmuligheder man har
-                Console.Write("Valg: ");
+                Console.Write("Valg: ");                
                 string choice = Console.ReadLine()?.ToUpper() ?? "";
 
                 if (choice == "E")
@@ -106,7 +106,9 @@ namespace ProjektGF2
 
                 if (specialRoll <= 5) // hvis den ruller under 5 fryser spillerens tur og ligger scoren til
                 {
-                    Console.WriteLine("FREEZE! Turen stopper.");
+                    Console.WriteLine("FREEZE! Turen stopper.");                    
+                    Console.WriteLine("Tryk på en tast for at fortsætte");
+                    Console.ReadKey();
                     BankPoints(player, turnScore, doublePoints);
                     break;
                 }
@@ -114,21 +116,25 @@ namespace ProjektGF2
                 {
                     secondLife = true;
                     Console.WriteLine("SECOND LIFE opnået!");
+                    Console.WriteLine();
                 }
                 else if (specialRoll <= 15) // hvis den ruller under 15 får man double bonus på turen
                 {
                     doublePoints = true;
                     Console.WriteLine("x2 BONUS aktiveret!");
+                    Console.WriteLine();
                 }
                 else if (specialRoll <= 25) // hvis den ruller under 25 får man 5 points til sin score på turen
                 {
                     turnScore += 5;
                     Console.WriteLine("+5 POINTS!");
+                    Console.WriteLine();
                 }
                 else if (specialRoll <= 30) // hvis den ruller under 30 får man 10 points til sin score på turen
                 {
                     turnScore += 10;
                     Console.WriteLine("+10 POINTS!");
+                    Console.WriteLine();
                 }
 
                 int card = DrawWeightedCard(); // trækker et tal fra DrawWeightedCard reglen
@@ -138,12 +144,16 @@ namespace ProjektGF2
                 {
                     if (secondLife) // tjekker om du har second life og giver dig en chance mere hvis du har
                     {
+                        Console.WriteLine();
                         Console.WriteLine("BUST! Second life brugt!");
                         secondLife = false;
                         continue;
                     }
 
+                    Console.WriteLine();
                     Console.WriteLine("BUST! Turen giver 0 point.");
+                    Console.WriteLine("Tryk på en tast for at forsætte");
+                    Console.ReadKey();
                     break;
                 }
 
